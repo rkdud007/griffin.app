@@ -1,0 +1,8 @@
+.nav {
+  display: flex;
+  width: -webkit-fill-available;
+  height: 6vh;
+
+  padding: 10px 42px;
+  align-items: center;
+}
