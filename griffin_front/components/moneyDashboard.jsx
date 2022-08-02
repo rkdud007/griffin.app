@@ -5,6 +5,7 @@ export default function MoneyDashboard() {
   const nightfall_balance = 32;
   const layer1_balance = 21;
   const [nightfall, setNightfall] = useState(true);
+  const L1connect = true;
   return (
     <div className={styles.dashboardBox}>
       <p>Choose Network </p>
@@ -18,15 +19,22 @@ export default function MoneyDashboard() {
             <p>L2</p>
           </li>
         )}
-
-        {nightfall ? (
-          <li onClick={() => setNightfall(false)}>
-            <p>L1</p>
-          </li>
-        ) : (
-          <li className={styles.selected} onClick={() => setNightfall(false)}>
-            <p>L1</p>
-          </li>
+        {L1connect && (
+          <>
+            {" "}
+            {nightfall ? (
+              <li onClick={() => setNightfall(false)}>
+                <p>L1</p>
+              </li>
+            ) : (
+              <li
+                className={styles.selected}
+                onClick={() => setNightfall(false)}
+              >
+                <p>L1</p>
+              </li>
+            )}
+          </>
         )}
       </ul>
       <div className={styles.dashboard}>
