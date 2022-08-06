@@ -3,6 +3,7 @@ import { axiosInstance } from "./common";
 
 const { GET_EMPLOYEE, GET_EMPLOYER } = API_URLS;
 
+
 export const getEmployeeApi = async (employerId) => {
   console.log(employerId);
   return await axiosInstance.get(GET_EMPLOYEE + "?employerId=" + employerId);
