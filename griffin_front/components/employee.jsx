@@ -57,6 +57,17 @@ const Employee = () => {
     const res = await postEmployeeFunc(employerId, postEmployee);
     console.log(res);
     setIsModalVisible(false);
+    setPostEmployee({
+      name: "",
+      email: "",
+      position: "",
+      account: "",
+      payroll: "",
+      curr: "ETH",
+      employType: "free",
+      id: "",
+      date: "",
+    });
     await getEmployee(employerId);
   };
 
@@ -303,7 +314,7 @@ const Employee = () => {
           ]}
         >
           <Radio.Group
-            name="currency"
+            name="curr"
             onChange={onChange}
             value={postEmployee.curr}
           >
