@@ -7,5 +7,7 @@ const API_URLS = {
   GET_CATEGORY: "/projects/categories",
   GET_PROJECT_ONE: "/projects/",
   GET_SEARCH_PROJECTS: "/projects/search",
+  GET_PRICE: "/price"
 };
+
 export default API_URLS;
