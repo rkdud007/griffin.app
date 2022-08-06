@@ -1,5 +1,13 @@
 import { useState } from "react";
 import styles from "../styles/dashboard.module.css";
+import BalanceAnalytics from "./balanceAnalytics";
+import CommitPayroll from "./commitpayroll";
+import ExpectedPay from "./expectedpayroll";
+import RecentEmployee from "./recentEmployee";
+import RecentPayrollActivity from "./recentpayrollactivity";
+import RigisterPayroll from "./registerpayroll";
+import TotalBalance from "./totalbalance";
+import TotalPayroll from "./totalpayroll";
 
 export default function MoneyDashboard() {
   const nightfall_balance = 32;
@@ -8,68 +16,19 @@ export default function MoneyDashboard() {
   const L1connect = true;
   return (
     <div className={styles.dashboardBox}>
-      <p>Choose Network </p>
-      <ul>
-        {nightfall ? (
-          <li className={styles.selected} onClick={() => setNightfall(true)}>
-            <p>L2</p>
-          </li>
-        ) : (
-          <li onClick={() => setNightfall(true)}>
-            <p>L2</p>
-          </li>
-        )}
-        {L1connect && (
-          <>
-            {" "}
-            {nightfall ? (
-              <li onClick={() => setNightfall(false)}>
-                <p>L1</p>
-              </li>
-            ) : (
-              <li
-                className={styles.selected}
-                onClick={() => setNightfall(false)}
-              >
-                <p>L1</p>
-              </li>
-            )}
-          </>
-        )}
-      </ul>
-      <div className={styles.dashboard}>
-        {nightfall ? (
-          <div className={styles.totalBalance}>
-            {" "}
-            <p>Polygon Nightfall</p>
-            <p>${nightfall_balance}</p>
-          </div>
-        ) : (
-          <div className={styles.totalBalance}>
-            {" "}
-            <p>Layer 1</p>
-            <p>${layer1_balance}</p>
-          </div>
-        )}
-        <div className={styles.balanceTable}>
-          <p>Balances on {nightfall ? "Nightfall" : "Ethereum"}</p>
-          <div>
-            <p>Name</p>
-            <p>Balance</p>
-          </div>
-          <div>
-            <p>ETH</p>
-            <p>$0.0000</p>
-          </div>
-          <div>
-            <p>MATIC</p>
-            <p>$0.0000</p>
-          </div>
-          <div>
-            <p>USDC</p>
-            <p>$0.0000</p>
-          </div>
-        </div>
+      <div className={styles.dashboardFirst}>
+        <TotalBalance />
+        <ExpectedPay />
+        <RigisterPayroll />
+        <CommitPayroll />
+      </div>
+      <div className={styles.dashboardSecond}>
+        <TotalPayroll />
+        <RecentEmployee />
+      </div>
+      <div className={styles.dashboardThird}>
+        <BalanceAnalytics />
+        <RecentPayrollActivity />
       </div>
     </div>
   );
