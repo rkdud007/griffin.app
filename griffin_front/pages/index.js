@@ -20,6 +20,8 @@ const App = () => {
   const router = useRouter();
   const {pathname, query} = router;
   console.log('query', query, pathname)
+
+  const {employeeId} = query;
   const [switchMode, setSwitchMode] = useState(1);
   const items2 = [
     {

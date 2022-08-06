@@ -9,12 +9,42 @@
   display: flex;
 }
 
+.dashboardThird > div {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
 .dashboardSecond {
   display: flex;
+  justify-content: space-around;
 }
 
 .dashboardSecond > div {
-  width: -webkit-fill-available !important;
+  margin: 19px;
+}
+
+.recentPayrollCont {
+  background: white;
+  padding: 4rem;
+  border-radius: 30px;
+  height: -webkit-fill-available;
+}
+
+.recentPayrollCont h1 {
+  font-size: x-large;
+}
+
+.balanceCont h1 {
+  font-size: x-large;
+}
+
+.balanceCont {
+  background: white;
+  border-radius: 30px;
+  margin: 14px;
 }
 
 .dashboardBox > p:first-child {
@@ -28,6 +58,17 @@
 
 .dashboardBox > ul {
   display: flex;
+}
+
+.totalpayrollCont h1 {
+  font-size: x-large;
+}
+
+.totalpayrollCont {
+  background: white;
+  padding: 5rem;
+  border-radius: 30px;
+  width: -webkit-fill-available;
 }
 
 .dashboardBox > ul > li {

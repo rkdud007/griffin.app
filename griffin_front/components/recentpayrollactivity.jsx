@@ -1,6 +1,7 @@
 import React from "react";
 import "antd/dist/antd.css";
 import { Table } from "antd";
+import styles from "../styles/dashboard.module.css";
 
 const columns = [
   {
@@ -28,7 +29,12 @@ for (let i = 0; i < 46; i++) {
 }
 
 const RecentPayrollActivity = () => {
-  return <Table columns={columns} dataSource={data} />;
+  return (
+    <div className={styles.recentPayrollCont}>
+      <h1>Recent Payroll Activity</h1>
+      <Table columns={columns} dataSource={data} />;
+    </div>
+  );
 };
 
 export default RecentPayrollActivity;
