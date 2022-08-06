@@ -1,7 +1,7 @@
 const API_URLS = {
   ///백엔드 맞추기!!! 수정전
   GET_EMPLOYEE: "/employee",
-  GET_PROJECTS: "/projects?",
+  GET_EMPLOYER: "/employer",
   GET_VC: "/venture-capitals",
   GET_MAINNET: "/projects/mainnets",
   GET_CATEGORY: "/projects/categories",

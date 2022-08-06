@@ -1,10 +1,12 @@
-import { useEffect, useState } from "react";
-import { getEmployeeApi } from "../api/employee";
-import styles from "../styles/employee.module.css";
+import React, { useEffect, useState } from "react";
 import "antd/dist/antd.css";
-import { Table } from "antd";
+import { Button, Table } from "antd";
+import { getEmployeeApi } from "../api/employee.js";
 
-export default function Employee() {
+const Employee = () => {
+  const [selectedRowKeys, setSelectedRowKeys] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [showMode, setShowMode] = useState(0);
   const [employeeReList, setEmployeeReList] = useState([]);
   const [employeeNReList, setEmployeeNReList] = useState([]);
   const [totalEmplyeeList, setTotalEmployeeList] = useState([]);
@@ -46,11 +48,15 @@ export default function Employee() {
       dataIndex: "date",
     },
   ];
-  useEffect(() => {
-    getEmployee(employerId);
-  }, []);
-  const [showMode, setShowMode] = useState(0);
-  const [selectedRowKeys, setSelectedRowKeys] = useState([]);
+  const start = () => {
+    setLoading(true); // ajax request after empty completing
+
+    setTimeout(() => {
+      setSelectedRowKeys([]);
+      setLoading(false);
+    }, 1000);
+  };
+
   const onSelectChange = (newSelectedRowKeys) => {
     console.log("selectedRowKeys changed: ", selectedRowKeys);
     setSelectedRowKeys(newSelectedRowKeys);
@@ -59,49 +65,40 @@ export default function Employee() {
   const rowSelection = {
     selectedRowKeys,
     onChange: onSelectChange,
-    selections: [
-      Table.SELECTION_ALL,
-      Table.SELECTION_INVERT,
-      Table.SELECTION_NONE,
-      {
-        id: "odd",
-        text: "Select Odd Row",
-        onSelect: (changableRowKeys) => {
-          let newSelectedRowKeys = [];
-          newSelectedRowKeys = changableRowKeys.filter((_, index) => {
-            if (index % 2 !== 0) {
-              return false;
-            }
-
-            return true;
-          });
-          setSelectedRowKeys(newSelectedRowKeys);
-        },
-      },
-      {
-        id: "even",
-        text: "Select Even Row",
-        onSelect: (changableRowKeys) => {
-          let newSelectedRowKeys = [];
-          newSelectedRowKeys = changableRowKeys.filter((_, index) => {
-            if (index % 2 !== 0) {
-              return true;
-            }
-
-            return false;
-          });
-          setSelectedRowKeys(newSelectedRowKeys);
-        },
-      },
-    ],
   };
 
+  useEffect(() => {
+    getEmployee(employerId);
+  }, []);
+
+  const hasSelected = selectedRowKeys.length > 0;
   return (
-    <>
+    <div>
       <div>
         <button onClick={() => setShowMode(0)}>Total</button>
         <button onClick={() => setShowMode(1)}>Full-Time</button>
         <button onClick={() => setShowMode(2)}>Contract</button>
+      </div>
+      <div
+        style={{
+          marginBottom: 16,
+        }}
+      >
+        <Button
+          type="primary"
+          onClick={start}
+          disabled={!hasSelected}
+          loading={loading}
+        >
+          Reload
+        </Button>
+        <span
+          style={{
+            marginLeft: 8,
+          }}
+        >
+          {hasSelected ? `Selected ${selectedRowKeys.length} items` : ""}
+        </span>
       </div>
       {showMode === 0 ? (
         <Table
@@ -122,6 +119,8 @@ export default function Employee() {
           dataSource={employeeNReList}
         />
       )}
-    </>
+    </div>
   );
-}
+};
+
+export default Employee;

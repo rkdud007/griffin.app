@@ -12,6 +12,7 @@ import {
   UserOutlined,
 } from "@ant-design/icons";
 import { Breadcrumb, Layout, Menu } from "antd";
+import Navbar from "../components/navbar";
 
 const { Header, Content, Sider } = Layout;
 
@@ -32,54 +33,57 @@ const App = () => {
     },
   ];
   return (
-    <Layout>
+    <>
+      <Navbar />
       <Layout>
-        <Sider width={200} className="site-layout-background">
-          <Menu
-            mode="inline"
-            defaultSelectedKeys={["1"]}
-            defaultOpenKeys={["sub1"]}
+        <Layout>
+          <Sider width={200} className="site-layout-background">
+            <Menu
+              mode="inline"
+              defaultSelectedKeys={["1"]}
+              defaultOpenKeys={["sub1"]}
+              style={{
+                height: "100%",
+                borderRight: 0,
+              }}
+              items={items2}
+            />
+          </Sider>
+          <Layout
             style={{
-              height: "100%",
-              borderRight: 0,
-            }}
-            items={items2}
-          />
-        </Sider>
-        <Layout
-          style={{
-            padding: "0 24px 24px",
-          }}
-        >
-          <Breadcrumb
-            style={{
-              margin: "16px 0",
+              padding: "0 24px 24px",
             }}
           >
-            <Breadcrumb.Item>Home</Breadcrumb.Item>
-            <Breadcrumb.Item>List</Breadcrumb.Item>
-            <Breadcrumb.Item>App</Breadcrumb.Item>
-          </Breadcrumb>
-          <Content
-            className="site-layout-background"
-            style={{
-              padding: 24,
-              margin: 0,
-              minHeight: 280,
-            }}
-          >
-            {switchMode === 1 ? (
-              <>
-                <Profile />
-                <MoneyDashboard />
-              </>
-            ) : (
-              <Employee />
-            )}
-          </Content>
+            <Breadcrumb
+              style={{
+                margin: "16px 0",
+              }}
+            >
+              <Breadcrumb.Item>Home</Breadcrumb.Item>
+              <Breadcrumb.Item>List</Breadcrumb.Item>
+              <Breadcrumb.Item>App</Breadcrumb.Item>
+            </Breadcrumb>
+            <Content
+              className="site-layout-background"
+              style={{
+                padding: 24,
+                margin: 0,
+                minHeight: 280,
+              }}
+            >
+              {switchMode === 1 ? (
+                <>
+                  <Profile />
+                  <MoneyDashboard />
+                </>
+              ) : (
+                <Employee />
+              )}
+            </Content>
+          </Layout>
         </Layout>
       </Layout>
-    </Layout>
+    </>
   );
 };
 
