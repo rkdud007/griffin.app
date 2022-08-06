@@ -8,6 +8,7 @@ import RecentPayrollActivity from "./recentpayrollactivity";
 import RigisterPayroll from "./registerpayroll";
 import TotalBalance from "./totalbalance";
 import TotalPayroll from "./totalpayroll";
+import { EmployeeDataProvider, EmployeeDataContext } from './states/employee-data'
 
 export default function MoneyDashboard() {
   const nightfall_balance = 32;
@@ -15,6 +16,7 @@ export default function MoneyDashboard() {
   const [nightfall, setNightfall] = useState(true);
   const L1connect = true;
   return (
+    <EmployeeDataProvider>
     <div className={styles.dashboardBox}>
       <div className={styles.dashboardFirst}>
         <TotalBalance />
@@ -24,12 +26,18 @@ export default function MoneyDashboard() {
       </div>
       <div className={styles.dashboardSecond}>
         <TotalPayroll />
-        <RecentEmployee />
+        <EmployeeDataContext.Consumer>
+          {(context) => {
+            return <RecentEmployee employees={context.employeeNReList}/>
+          }
+          }
+        </EmployeeDataContext.Consumer>
       </div>
       <div className={styles.dashboardThird}>
         <BalanceAnalytics />
         <RecentPayrollActivity />
       </div>
     </div>
+    </EmployeeDataProvider>
   );
 }
