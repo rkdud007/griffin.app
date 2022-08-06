@@ -20,9 +20,9 @@ export const EmployeeDataProvider = ({children})=>{
       console.log(employerId);
       const res = await getEmployeeApi(employerId);
       setEmployeeNReList(res.data.repeat_false.map(mapEmployeeData));
-      setEmployeeReList(res.data.repeat_true.map(mapEmployeeData));
+      setEmployeeReList((res.data.repeat_true || []).map(mapEmployeeData));
       setTotalEmployee(res.data.total_length);
-      setTotalEmployeeList(res.data.repeat_true.concat(res.data.repeat_false));
+      setTotalEmployeeList((res.data.repeat_true || []).concat(res.data.repeat_false));
       console.log(res);
     };
 

@@ -2,7 +2,7 @@ import DemoColumn from "../components/totalpayroll";
 import Employee from "../components/employee";
 import MoneyDashboard from "../components/moneyDashboard";
 import Profile from "../components/profile";
-
+import { useRouter } from 'next/router'
 import React, { useState } from "react";
 import "antd/dist/antd.css";
 
@@ -17,6 +17,9 @@ import Navbar from "../components/navbar";
 const { Header, Content, Sider } = Layout;
 
 const App = () => {
+  const router = useRouter();
+  const {pathname, query} = router;
+  console.log('query', query, pathname)
   const [switchMode, setSwitchMode] = useState(1);
   const items2 = [
     {

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Pie, measureTextWidth } from "@ant-design/plots";
-import PieCard  from './pieCard';
+import PieChart  from './pieChart';
 
 const TotalBalancePie = () => {
   function renderStatistic(containerWidth, text, style) {
@@ -106,7 +106,7 @@ const TotalBalancePie = () => {
       },
     ],
   };
-  return <PieCard data={data} />
+  return <PieChart data={data} />
 };
 
 import { Column } from "@ant-design/plots";
@@ -165,15 +165,7 @@ const DemoColumn = () => {
         autoHide: true,
         autoRotate: false,
       },
-    },
-    meta: {
-      type: {
-        alias: "类别",
-      },
-      sales: {
-        alias: "销售额",
-      },
-    },
+    }
   };
   return <Column {...config} />;
 };
