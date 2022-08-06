@@ -1,6 +1,5 @@
 import DemoColumn from "../components/totalpayroll";
 import Employee from "../components/employee";
-import { useRouter } from "next/router";
 import MoneyDashboard from "../components/moneyDashboard";
 import Profile from "../components/profile";
 import { useRouter } from "next/router";
