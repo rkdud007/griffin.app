@@ -1,5 +1,6 @@
 import DemoColumn from "../components/totalpayroll";
 import Employee from "../components/employee";
+import { useRouter } from "next/router";
 import MoneyDashboard from "../components/moneyDashboard";
 import Profile from "../components/profile";
 
@@ -17,19 +18,29 @@ import Navbar from "../components/navbar";
 const { Header, Content, Sider } = Layout;
 
 const App = () => {
+  const router = useRouter();
+  const { employerId, tab } = router.query;
   const [switchMode, setSwitchMode] = useState(1);
   const items2 = [
     {
       key: `sub1`,
       icon: React.createElement(LaptopOutlined),
       label: `Dashboard`,
-      onClick: () => setSwitchMode(1),
+      onClick: () =>
+        router.push({
+          pathname: "/",
+          query: { employerId: employerId, tab: "Dashboard" },
+        }),
     },
     {
       key: `sub2`,
       icon: React.createElement(UserOutlined),
       label: `Employee`,
-      onClick: () => setSwitchMode(2),
+      onClick: () =>
+        router.push({
+          pathname: "/",
+          query: { employerId: employerId, tab: "Employee" },
+        }),
     },
   ];
   return (
@@ -71,13 +82,15 @@ const App = () => {
                 minHeight: 280,
               }}
             >
-              {switchMode === 1 ? (
+              {tab === "Dashboard" ? (
                 <>
                   <Profile />
                   <MoneyDashboard />
                 </>
-              ) : (
+              ) : tab === "Employee" ? (
                 <Employee />
+              ) : (
+                <p>nothing to show</p>
               )}
             </Content>
           </Layout>

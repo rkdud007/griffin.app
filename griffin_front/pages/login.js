@@ -23,7 +23,7 @@ const Login = () => {
     console.log(res.username, res);
     router.push({
       pathname: "/",
-      query: { employerId: res.data.employerId },
+      query: { employerId: res.data.employerId, tab: "Dashboard" },
     });
   };
 
