@@ -2,7 +2,7 @@ const API_URLS = {
   ///백엔드 맞추기!!! 수정전
   GET_EMPLOYEE: "/employee",
   GET_EMPLOYER: "/employer",
-  GET_VC: "/venture-capitals",
+  PAYMENT: "/payment",
   GET_MAINNET: "/projects/mainnets",
   GET_CATEGORY: "/projects/categories",
   GET_PROJECT_ONE: "/projects/",

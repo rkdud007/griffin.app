@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { useRouter } from "next/router";
 import "antd/dist/antd.css";
 import { Table } from "antd";
 import styles from "../styles/dashboard.module.css";
+import { getPaymentApi } from "../api/employee";
 
 const columns = [
   {
@@ -9,12 +11,12 @@ const columns = [
     dataIndex: "name",
   },
   {
-    title: "Age",
-    dataIndex: "age",
+    title: "Payroll",
+    dataIndex: "payroll",
   },
   {
-    title: "Address",
-    dataIndex: "address",
+    title: "Date",
+    dataIndex: "time",
   },
 ];
 const data = [];
@@ -29,6 +31,18 @@ for (let i = 0; i < 46; i++) {
 }
 
 const RecentPayrollActivity = () => {
+  const [data, setData] = useState([]);
+  const router = useRouter();
+  const { employerId } = router.query;
+  const getPayrollActivity = async (employerId) => {
+    const res = await getPaymentApi(employerId);
+    setData(res.data);
+  };
+
+  useEffect(() => {
+    getPayrollActivity(employerId);
+  }, []);
+
   return (
     <div className={styles.recentPayrollCont}>
       <h1>Recent Payroll Activity</h1>

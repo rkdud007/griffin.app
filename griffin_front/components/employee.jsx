@@ -2,7 +2,11 @@ import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import "antd/dist/antd.css";
 import { Button, Table, Modal, Form, Input, Menu, Radio } from "antd";
-import { getEmployeeApi, postEmployeeApi } from "../api/employee.js";
+import {
+  getEmployeeApi,
+  postEmployeeApi,
+  postPaymentApi,
+} from "../api/employee.js";
 
 const Employee = () => {
   const router = useRouter();
@@ -127,7 +131,24 @@ const Employee = () => {
     setSelectedRowKeys(newSelectedRowKeys);
   };
 
-  console.log(selectedRowKeys);
+  const paynowPress = () => {
+    //do transfer
+    console.log(selectedRowKeys);
+    selectedRowKeys.map(async (key) => {
+      const selectedEmployee = totalEmplyeeList.find(
+        (employee) => employee.key === key
+      );
+
+      const res = await postPaymentApi(
+        employerId,
+        selectedEmployee.name,
+        selectedEmployee.payroll,
+        selectedEmployee.curr
+      );
+      console.log(res);
+    });
+    window.alert("success fully paymented");
+  };
 
   const rowSelection = {
     selectedRowKeys,
@@ -147,7 +168,7 @@ const Employee = () => {
         <button onClick={() => setShowMode(1)}>Full-Time</button>
         <button onClick={() => setShowMode(2)}>Contract</button>
       </div>
-      <button>pay now</button>
+      <button onClick={paynowPress}>pay now</button>
       <Button type="primary" onClick={showModal}>
         Open Modal
       </Button>
