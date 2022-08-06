@@ -6,8 +6,7 @@ describe('employee', () => {
     const results =  await getEmployeeApi('1');
 
 
-
-    // expect(myBeverage.delicious).toBeTruthy();
+    expect(results.data.total_length>0).toBeTruthy();
   });
 
 });
