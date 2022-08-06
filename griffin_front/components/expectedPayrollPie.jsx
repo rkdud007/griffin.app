@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Pie, measureTextWidth } from "@ant-design/plots";
+import PieChart  from './pieChart';
 
 const ExpectedPayrollPie = () => {
   function renderStatistic(containerWidth, text, style) {
@@ -105,7 +106,7 @@ const ExpectedPayrollPie = () => {
       },
     ],
   };
-  return <Pie {...config} />;
+  return <PieChart data={data} />
 };
 
 import { Column } from "@ant-design/plots";

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Pie, measureTextWidth } from "@ant-design/plots";
+import PieChart  from './pieChart';
 
 const TotalBalancePie = () => {
   function renderStatistic(containerWidth, text, style) {
@@ -67,14 +68,14 @@ const TotalBalancePie = () => {
     statistic: {
       title: {
         offsetY: -4,
-        customHtml: (container, view, datum) => {
-          const { width, height } = container.getBoundingClientRect();
-          const d = Math.sqrt(Math.pow(width / 2, 2) + Math.pow(height / 2, 2));
-          const text = datum ? datum.type : "Total Payroll";
-          return renderStatistic(d, text, {
-            fontSize: 10,
-          });
-        },
+        // customHtml: (container, view, datum) => {
+        //   const { width, height } = container.getBoundingClientRect();
+        //   const d = Math.sqrt(Math.pow(width / 2, 2) + Math.pow(height / 2, 2));
+        //   const text = datum ? datum.type : "Total Payroll";
+        //   return renderStatistic(d, text, {
+        //     fontSize: 10,
+        //   });
+        // },
       },
       content: {
         offsetY: 4,
@@ -105,7 +106,7 @@ const TotalBalancePie = () => {
       },
     ],
   };
-  return <Pie {...config} />;
+  return <PieChart data={data} />
 };
 
 export default TotalBalancePie;
