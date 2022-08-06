@@ -3,6 +3,7 @@ import "antd/dist/antd.css";
 import { Card } from "antd";
 import PieCard from './pieCard.jsx';
 import TotalBalancePie from "./totalBalancePie";
+import styles from "../styles/dashboard.module.css";
 
 const TotalBalance = () => (
   <PieCard

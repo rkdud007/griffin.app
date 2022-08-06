@@ -1,16 +1,16 @@
 import { API_URLS } from "../constants";
 import { axiosInstance } from "./common";
 
-const { GET_EMPLOYEE, GET_EMPLOYER } = API_URLS;
+const { GET_EMPLOYEE, GET_EMPLOYER, LOGIN } = API_URLS;
 
 export const getEmployeeApi = async (employerId) => {
   console.log(employerId);
   return await axiosInstance.get(GET_EMPLOYEE + "?employerId=" + employerId);
 };
 
-export const loginApi = async (id, password) => {
+export const loginApi = async (employerId, employerPw) => {
   return await axiosInstance.get(
-    GET_EMPLOYER + "?id=" + id + "&password=" + password
+    LOGIN + "?employerId=" + employerId + "&employerPw=" + employerPw
   );
 };
 
