@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
 import "antd/dist/antd.css";
-import { Button, Table } from "antd";
-import { getEmployeeApi } from "../api/employee.js";
+import { Button, Table, Modal, Form, Input, Menu, Radio } from "antd";
+import { getEmployeeApi, postEmployeeApi } from "../api/employee.js";
 
 const Employee = () => {
+  const [isModalVisible, setIsModalVisible] = useState(false);
   const [selectedRowKeys, setSelectedRowKeys] = useState([]);
   const [loading, setLoading] = useState(false);
   const [showMode, setShowMode] = useState(0);
@@ -12,6 +13,17 @@ const Employee = () => {
   const [totalEmplyeeList, setTotalEmployeeList] = useState([]);
   const [totalEmployee, setTotalEmployee] = useState();
   const [employerId, setEmployerId] = useState(2);
+  const [postEmployee, setPostEmployee] = useState({
+    name: "",
+    email: "",
+    position: "",
+    account: "",
+    payroll: "",
+    curr: "ETH",
+    employType: "free",
+    id: "",
+    date: "",
+  });
   const getEmployee = async (employerId) => {
     console.log(employerId);
     const res = await getEmployeeApi(employerId);
@@ -20,6 +32,44 @@ const Employee = () => {
     setTotalEmployee(res.data.total_length);
     setTotalEmployeeList(res.data.repeat_true.concat(res.data.repeat_false));
     console.log(res);
+  };
+
+  const postEmployeeFunc = async (employerId, postEmployee) => {
+    console.log(employerId, postEmployee);
+    const res = await postEmployeeApi(employerId, postEmployee);
+
+    console.log(res);
+  };
+
+  const onChange = (e) => {
+    const { value, name } = e.target;
+    console.log(value, name);
+    const copy = { ...postEmployee };
+    copy[name] = value;
+    setPostEmployee(copy);
+  };
+
+  const showModal = () => {
+    setIsModalVisible(true);
+  };
+
+  const handleOk = async () => {
+    const res = await postEmployeeFunc(employerId, postEmployee);
+    console.log(res);
+    setIsModalVisible(false);
+    await getEmployee(employerId);
+  };
+
+  const handleCancel = () => {
+    setIsModalVisible(false);
+  };
+
+  const handleMenuClick = (e) => {
+    console.log(e);
+    const copy = { ...postEmployee };
+    copy.curr = e.key;
+    console.log(copy);
+    setPostEmployee(copy);
   };
 
   const columns = [
@@ -44,6 +94,10 @@ const Employee = () => {
       dataIndex: "payroll",
     },
     {
+      title: "Currency",
+      dataIndex: "curr",
+    },
+    {
       title: "Date",
       dataIndex: "date",
     },
@@ -62,6 +116,8 @@ const Employee = () => {
     setSelectedRowKeys(newSelectedRowKeys);
   };
 
+  console.log(selectedRowKeys);
+
   const rowSelection = {
     selectedRowKeys,
     onChange: onSelectChange,
@@ -71,6 +127,26 @@ const Employee = () => {
     getEmployee(employerId);
   }, []);
 
+  const menu = (
+    <Menu
+      onClick={handleMenuClick}
+      items={[
+        {
+          label: "ETH",
+          key: "ETH",
+        },
+        {
+          label: "MATIC",
+          key: "MATIC",
+        },
+        {
+          label: "USDC",
+          key: "USDC",
+        },
+      ]}
+    />
+  );
+
   const hasSelected = selectedRowKeys.length > 0;
   return (
     <div>
@@ -79,6 +155,164 @@ const Employee = () => {
         <button onClick={() => setShowMode(1)}>Full-Time</button>
         <button onClick={() => setShowMode(2)}>Contract</button>
       </div>
+      <button>pay now</button>
+      <Button type="primary" onClick={showModal}>
+        Open Modal
+      </Button>
+      <Modal
+        title="Basic Modal"
+        visible={isModalVisible}
+        onOk={handleOk}
+        onCancel={handleCancel}
+      >
+        <Form.Item
+          label="name"
+          name="name"
+          rules={[
+            {
+              required: true,
+              message: "Please input your username!",
+            },
+          ]}
+        >
+          <Input
+            name="name"
+            defaultValue={postEmployee.name}
+            onChange={onChange}
+          />
+        </Form.Item>
+        <Form.Item
+          label="Email"
+          name="email"
+          rules={[
+            {
+              required: true,
+              message: "Please input your username!",
+            },
+          ]}
+        >
+          <Input
+            name="email"
+            defaultValue={postEmployee.email}
+            onChange={onChange}
+          />
+        </Form.Item>
+        <Form.Item
+          label="ID"
+          name="id"
+          rules={[
+            {
+              required: true,
+              message: "Please input your username!",
+            },
+          ]}
+        >
+          <Input name="id" defaultValue={postEmployee.id} onChange={onChange} />
+        </Form.Item>
+        <Form.Item
+          label="Position"
+          name="position"
+          rules={[
+            {
+              required: true,
+              message: "Please input your username!",
+            },
+          ]}
+        >
+          <Input
+            name="position"
+            defaultValue={postEmployee.position}
+            onChange={onChange}
+          />
+        </Form.Item>
+        <Form.Item
+          label="Wallet"
+          name="address"
+          rules={[
+            {
+              required: true,
+              message: "Please input your username!",
+            },
+          ]}
+        >
+          <Input
+            name="account"
+            defaultValue={postEmployee.account}
+            onChange={onChange}
+          />
+        </Form.Item>
+        <Form.Item
+          label="date"
+          name="date"
+          rules={[
+            {
+              required: true,
+              message: "Please input your username!",
+            },
+          ]}
+        >
+          <Input
+            name="date"
+            defaultValue={postEmployee.date}
+            onChange={onChange}
+          />
+        </Form.Item>
+        <Form.Item
+          label="Payroll"
+          name="payroll"
+          rules={[
+            {
+              required: true,
+              message: "Please input your username!",
+            },
+          ]}
+        >
+          <Input
+            name="payroll"
+            defaultValue={postEmployee.payroll}
+            onChange={onChange}
+          />
+        </Form.Item>
+        <Form.Item
+          label="Employ Type"
+          name="employType"
+          rules={[
+            {
+              required: true,
+              message: "Please input your username!",
+            },
+          ]}
+        >
+          <Radio.Group
+            name="employType"
+            onChange={onChange}
+            value={postEmployee.employType}
+          >
+            <Radio value="free">contract</Radio>
+            <Radio value="perma">full-time</Radio>
+          </Radio.Group>
+        </Form.Item>
+        <Form.Item
+          label="Currency"
+          name="currency"
+          rules={[
+            {
+              required: true,
+              message: "Please input your username!",
+            },
+          ]}
+        >
+          <Radio.Group
+            name="currency"
+            onChange={onChange}
+            value={postEmployee.curr}
+          >
+            <Radio value="ETH">ETH</Radio>
+            <Radio value="MATIC">MATIC</Radio>
+            <Radio value="USDC">USDC</Radio>
+          </Radio.Group>
+        </Form.Item>
+      </Modal>
       <div
         style={{
           marginBottom: 16,
