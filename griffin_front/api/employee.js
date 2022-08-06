@@ -22,8 +22,8 @@ export const postEmployeeApi = async (employerId, postEmployee) => {
       employerId +
       "&employType=" +
       postEmployee.employType +
-      "&id=" +
-      postEmployee.id +
+      "&key=" +
+      postEmployee.key +
       "&name=" +
       postEmployee.name +
       "&email=" +

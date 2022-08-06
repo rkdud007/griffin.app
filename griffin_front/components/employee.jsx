@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
+import { useRouter } from "next/router";
 import "antd/dist/antd.css";
 import { Button, Table, Modal, Form, Input, Menu, Radio } from "antd";
 import { getEmployeeApi, postEmployeeApi } from "../api/employee.js";
 
 const Employee = () => {
+  const router = useRouter();
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [selectedRowKeys, setSelectedRowKeys] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -12,7 +14,7 @@ const Employee = () => {
   const [employeeNReList, setEmployeeNReList] = useState([]);
   const [totalEmplyeeList, setTotalEmployeeList] = useState([]);
   const [totalEmployee, setTotalEmployee] = useState();
-  const [employerId, setEmployerId] = useState(2);
+  const { employerId } = router.query;
   const [postEmployee, setPostEmployee] = useState({
     name: "",
     email: "",
@@ -21,17 +23,23 @@ const Employee = () => {
     payroll: "",
     curr: "ETH",
     employType: "free",
-    id: "",
+    key: "",
     date: "",
   });
+
   const getEmployee = async (employerId) => {
     console.log(employerId);
     const res = await getEmployeeApi(employerId);
-    setEmployeeNReList(res.data.repeat_false);
-    setEmployeeReList(res.data.repeat_true);
+    if (res.data.repeat_false) setEmployeeNReList(res.data.repeat_false);
+    if (res.data.repeat_true) setEmployeeReList(res.data.repeat_true);
     setTotalEmployee(res.data.total_length);
-    setTotalEmployeeList(res.data.repeat_true.concat(res.data.repeat_false));
-    console.log(res);
+    setTotalEmployeeList(res.data.repeat_true?.concat(res.data.repeat_false));
+    console.log(
+      res,
+      res.data.repeat_false,
+      res.data.repeat_true,
+      res.data.repeat_true?.concat(res.data.repeat_false)
+    );
   };
 
   const postEmployeeFunc = async (employerId, postEmployee) => {
@@ -65,7 +73,7 @@ const Employee = () => {
       payroll: "",
       curr: "ETH",
       employType: "free",
-      id: "",
+      key: "",
       date: "",
     });
     await getEmployee(employerId);
@@ -73,14 +81,6 @@ const Employee = () => {
 
   const handleCancel = () => {
     setIsModalVisible(false);
-  };
-
-  const handleMenuClick = (e) => {
-    console.log(e);
-    const copy = { ...postEmployee };
-    copy.curr = e.key;
-    console.log(copy);
-    setPostEmployee(copy);
   };
 
   const columns = [
@@ -135,28 +135,9 @@ const Employee = () => {
   };
 
   useEffect(() => {
+    console.log(employerId);
     getEmployee(employerId);
   }, []);
-
-  const menu = (
-    <Menu
-      onClick={handleMenuClick}
-      items={[
-        {
-          label: "ETH",
-          key: "ETH",
-        },
-        {
-          label: "MATIC",
-          key: "MATIC",
-        },
-        {
-          label: "USDC",
-          key: "USDC",
-        },
-      ]}
-    />
-  );
 
   const hasSelected = selectedRowKeys.length > 0;
   return (
@@ -210,7 +191,7 @@ const Employee = () => {
         </Form.Item>
         <Form.Item
           label="ID"
-          name="id"
+          name="key"
           rules={[
             {
               required: true,
@@ -218,7 +199,11 @@ const Employee = () => {
             },
           ]}
         >
-          <Input name="id" defaultValue={postEmployee.id} onChange={onChange} />
+          <Input
+            name="key"
+            defaultValue={postEmployee.id}
+            onChange={onChange}
+          />
         </Form.Item>
         <Form.Item
           label="Position"

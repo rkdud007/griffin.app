@@ -19,6 +19,7 @@ const { Header, Content, Sider } = Layout;
 const App = () => {
   const router = useRouter();
   const { pathname, query } = router;
+  const { employerId, tab } = query;
   console.log("query", query, pathname);
   const items2 = [
     {
