@@ -1,4 +1,5 @@
 import DemoColumn from "../components/totalpayroll";
+import Nf3 from '../../../nightfall_3/cli/lib/nf3.mjs';
 import Employee from "../components/employee";
 import MoneyDashboard from "../components/moneyDashboard";
 import Profile from "../components/profile";
@@ -14,13 +15,24 @@ import {
 import { Breadcrumb, Layout, Menu } from "antd";
 import Navbar from "../components/navbar";
 
+const nf3 = new Nf3('0x4775af73d6dc84a0ae76f8726bda4b9ecf187c377229cb39e1afa7a18236a69e', {
+  clientApiUrl: "http://localhost:8080",
+  optimistApiUrl: "http://localhost:8081",
+  optimistWsUrl: "ws://localhost:8082",
+  web3WsUrl: "ws://localhost:8546",
+});
+
 const { Header, Content, Sider } = Layout;
 
-const App = () => {
+const App = async() => {
   const router = useRouter();
   const { pathname, query } = router;
   const { employerId, tab } = query;
   console.log("query", query, pathname);
+
+  await nf3.init('trip differ bamboo bundle bonus luxury strike mad merry muffin nose auction');
+  // await nf3.init(generateMnemonic());
+  console.log(nf3.zkpKeys);
   const items2 = [
     {
       key: `sub1`,
