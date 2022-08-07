@@ -3,12 +3,11 @@ import "antd/dist/antd.css";
 import PieCard from './pieCard.jsx';
 import { Card } from "antd";
 import ExpectedPayrollPie from "./expectedPayrollPie";
+import { asDataPairs } from './calculate';
 
-
-
-const ExpectedPay = () => (
+const ExpectedPay = ({statistics, byToken}) => (
     <PieCard
-    pie={ <ExpectedPayrollPie />} 
+    pie={ <ExpectedPayrollPie statistics={statistics} data={asDataPairs(byToken)} />} 
     title="expectedPayroll"
     statistics={234}
 />);
