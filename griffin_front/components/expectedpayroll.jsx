@@ -7,9 +7,9 @@ import { asDataPairs } from './calculate';
 
 const ExpectedPay = ({statistics, byToken}) => (
     <PieCard
-    pie={ <ExpectedPayrollPie statistics={statistics} data={asDataPairs(byToken)} />} 
+    pie={ <ExpectedPayrollPie  data={asDataPairs(byToken)} />} 
     title="expectedPayroll"
-    statistics={234}
+    statistics={statistics}
 />);
 
 

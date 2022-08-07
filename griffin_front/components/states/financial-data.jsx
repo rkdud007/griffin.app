@@ -16,11 +16,17 @@ export const FinancialDataProvider = ({children})=>{
       'matic': 2,
       'usdc': 123
     });
+    const [totalExpectedPayByToken, setTotalExpectedPayByToken] = useState({
+      'eth':1,
+      'matic': 2,
+      'usdc': 123
+    });
     
 
     const [totalBalance, setTotalBalance] = useState(0);
 
     const [totalPayroll, setTotalPayroll] = useState(0);
+    const [totalExpectedPay, setTotalExpectedPay] = useState(0);
 
     const loadFinancialData = async () => {
         const res = await getPriceApi();
@@ -29,8 +35,9 @@ export const FinancialDataProvider = ({children})=>{
         setTotalBalance(aggregate(totalBalanceByToken, priceData));
 
         setTotalPayrollByToken(convertUsd(totalPayrollByToken, priceData));
-        console.log('totalPayrollByToken', totalPayrollByToken)
         setTotalPayroll(aggregate(totalPayrollByToken, priceData));
+        setTotalExpectedPayByToken(convertUsd(totalExpectedPayByToken, priceData));
+        setTotalExpectedPay(aggregate(totalExpectedPayByToken, priceData));
     };
 
      useEffect(() => {
@@ -43,7 +50,9 @@ export const FinancialDataProvider = ({children})=>{
           totalBalanceByToken,
           totalBalance,
           totalPayrollByToken,
-          totalPayroll
+          totalPayroll,
+          totalExpectedPayByToken,
+          totalExpectedPay
         }}
       >
         {children}

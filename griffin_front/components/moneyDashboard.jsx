@@ -28,7 +28,7 @@ export default function MoneyDashboard() {
             <div className={styles.dashboardBox}>
                 <div className={styles.dashboardFirst}>
                   <TotalBalance byToken={context.totalBalanceByToken} statistics={context.totalBalance} />
-                  <ExpectedPay />
+                  <ExpectedPay byToken={context.totalExpectedPayByToken} statistics={context.totalExpectedPay} />
                   <div className={styles.btnBox}>
                     <RigisterPayroll />
                     <CommitPayroll />
