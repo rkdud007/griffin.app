@@ -1,77 +1,21 @@
 import { Column } from "@ant-design/plots";
 import styles from "../styles/dashboard.module.css";
 
-const TotalPayroll = () => {
+const TotalPayroll = (props) => {
   const data = [
     {
       type: "Aug 2021",
-      sales: 2000,
+      value: 2000,
     },
     {
       type: "Sep 2021",
-      sales: 1500,
-    },
-    {
-      type: "Oct 2021",
-      sales: 800,
-    },
-    {
-      type: "Nov 2021",
-      sales: 1800,
-    },
-    {
-      type: "Dec 2021",
-      sales: 1000,
-    },
-    {
-      type: "Jan 2022",
-      sales: 2000,
-    },
-    {
-      type: "Fab 2022",
-      sales: 1300,
-    },
-    {
-      type: "Mar 2022",
-      sales: 600,
-    },
-    {
-      type: "Aug 2021",
-      sales: 2000,
-    },
-    {
-      type: "Sep 2021",
-      sales: 1500,
-    },
-    {
-      type: "Oct 2021",
-      sales: 800,
-    },
-    {
-      type: "Nov 2021",
-      sales: 1800,
-    },
-    {
-      type: "Dec 2021",
-      sales: 1000,
-    },
-    {
-      type: "Jan 2022",
-      sales: 2000,
-    },
-    {
-      type: "Fab 2022",
-      sales: 1300,
-    },
-    {
-      type: "Mar 2022",
-      sales: 600,
-    },
+      value: 1500,
+    }
   ];
   const config = {
     data,
     xField: "type",
-    yField: "sales",
+    yField: "value",
     label: {
       // 可手动配置 label 数据标签位置
       position: "middle",
@@ -92,7 +36,7 @@ const TotalPayroll = () => {
       type: {
         alias: "ee",
       },
-      sales: {
+      value: {
         alias: "ee",
       },
     },

@@ -12,6 +12,7 @@ import {
   EmployeeDataProvider,
   EmployeeDataContext,
 } from "./states/employee-data";
+import { FinancialDataContext, FinancialDataProvider } from "./states/financial-data";
 
 export default function MoneyDashboard() {
   const nightfall_balance = 32;
@@ -19,29 +20,38 @@ export default function MoneyDashboard() {
   const [nightfall, setNightfall] = useState(true);
   const L1connect = true;
   return (
-    <EmployeeDataProvider>
-      <div className={styles.dashboardBox}>
-        <div className={styles.dashboardFirst}>
-          <TotalBalance />
-          <ExpectedPay />
-          <div className={styles.btnBox}>
-            <RigisterPayroll />
-            <CommitPayroll />
-          </div>
-        </div>
-        <div className={styles.dashboardSecond}>
-          <TotalPayroll />
-          <EmployeeDataContext.Consumer>
-            {(context) => {
-              return <RecentEmployee employees={context.employeeNReList} />;
-            }}
-          </EmployeeDataContext.Consumer>
-        </div>
-        <div className={styles.dashboardThird}>
-          <BalanceAnalytics />
-          <RecentPayrollActivity />
-        </div>
-      </div>
+    <EmployeeDataProvider>       
+       <FinancialDataProvider>
+       <FinancialDataContext.Consumer>
+       {(context) => {
+        return (
+            <div className={styles.dashboardBox}>
+                <div className={styles.dashboardFirst}>
+                  <TotalBalance byToken={context.totalBalanceByToken} statistics={context.totalBalance} />
+                  <ExpectedPay byToken={context.totalExpectedPayByToken} statistics={context.totalExpectedPay} />
+                  <div className={styles.btnBox}>
+                    <RigisterPayroll />
+                    <CommitPayroll />
+                  </div>
+                </div>
+                <div className={styles.dashboardSecond}>
+                  <TotalPayroll byToken={context.totalPayrollByToken} statistics={context.totalPayroll} />
+                  <EmployeeDataContext.Consumer>
+                    {(context) => {
+                      return <RecentEmployee employees={context.employeeNReList} />;
+                    }}
+                  </EmployeeDataContext.Consumer>
+                </div>
+                <div className={styles.dashboardThird}>
+                  <BalanceAnalytics />
+                  <RecentPayrollActivity />
+                </div>
+            </div>
+          )              
+          }}
+      
+      </FinancialDataContext.Consumer>
+      </FinancialDataProvider>
     </EmployeeDataProvider>
   );
 }

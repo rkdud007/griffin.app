@@ -28,10 +28,10 @@ const PieChart = ({data}) => {
       }
 
       const textStyleStr = `width:${containerWidth}px;`;
-      
-      return `<div style="${textStyleStr};font-size:${scale}em;line-height:${
-        scale < 1 ? 1 : "inherit"
-      };">${text}</div>`;
+      return '';
+      // return `<div style="${textStyleStr};font-size:${scale}em;line-height:${
+      //   scale < 1 ? 1 : "inherit"
+      // };">${text}</div>`;
     }
     
     const config = {
