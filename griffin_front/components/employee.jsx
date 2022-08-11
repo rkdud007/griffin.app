@@ -7,6 +7,7 @@ import {
   postEmployeeApi,
   postPaymentApi,
 } from "../api/employee.js";
+import styles from "../styles/employee.module.css";
 
 const Employee = () => {
   const router = useRouter();
@@ -163,15 +164,18 @@ const Employee = () => {
   const hasSelected = selectedRowKeys.length > 0;
   return (
     <div>
-      <div>
+      <div className={styles.btnCont}>
         <button onClick={() => setShowMode(0)}>Total</button>
         <button onClick={() => setShowMode(1)}>Full-Time</button>
         <button onClick={() => setShowMode(2)}>Contract</button>
       </div>
-      <button onClick={paynowPress}>pay now</button>
-      <Button type="primary" onClick={showModal}>
-        Open Modal
-      </Button>
+      <div className={styles.btnCont}>
+        <button onClick={paynowPress}>pay now</button>
+        <Button type="primary" onClick={showModal}>
+          Add Employee
+        </Button>
+      </div>
+
       <Modal
         title="Basic Modal"
         visible={isModalVisible}

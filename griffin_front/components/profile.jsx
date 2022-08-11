@@ -13,7 +13,7 @@ export default function Profile() {
 
   return (
     <div className={styles.profileBox}>
-      <Descriptions title="Info">
+      <Descriptions title="Company Profile">
         <Descriptions.Item label="Name">{data.name}</Descriptions.Item>
         <Descriptions.Item label="Description">
           {data.description}

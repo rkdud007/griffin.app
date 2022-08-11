@@ -36,7 +36,7 @@ const RecentPayrollActivity = () => {
   const { employerId } = router.query;
   const getPayrollActivity = async (employerId) => {
     const res = await getPaymentApi(employerId);
-    setData(res.data);
+    setData(res.data.reverse());
   };
 
   useEffect(() => {

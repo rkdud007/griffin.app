@@ -187,3 +187,7 @@
 .balanceTable > div:nth-child(2) {
   border-bottom: 1px solid black;
 }
+
+.cardBox > div > div:first-child > h3 {
+  font-size: x-large !important;
+}

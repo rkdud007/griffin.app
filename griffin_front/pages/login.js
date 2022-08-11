@@ -36,6 +36,9 @@ const Login = () => {
   };
   return (
     <div className={styles.loginBox}>
+      <div>
+        <h1>Welcome to GRIFFIN!</h1>
+      </div>
       <Form
         name="basic"
         labelCol={{
