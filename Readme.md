@@ -18,10 +18,9 @@
   
   <div align="center">
 
-[![Golang](https://img.shields.io/badge/Golang-v0.5.2-blue?logo=Golang)](https://developer.apple.com/kr/swift/)
+[![golang](https://img.shields.io/badge/golang-v1.18-blue?logo=golang)](https://developer.apple.com/kr/swift/)
 [![Javascript](https://img.shields.io/badge/javascript-ES6+-yellow?logo=javascript)](https://github.com/airbnb/javascript)
 [![next.js](https://img.shields.io/badge/next.js-v12.0.8-white?logo=next.js)](https://www.typescriptlang.org/)
-[![Django](https://img.shields.io/badge/Django-v12.18.3-green?logo=Django)](https://Django.org/ko/)
 
   </div>
   
