@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Pie, measureTextWidth } from "@ant-design/plots";
 import PieChart  from './pieChart';
 
-const TotalBalancePie = () => {
+const TotalBalancePie = ({data}) => {
   function renderStatistic(containerWidth, text, style) {
     const { width: textWidth, height: textHeight } = measureTextWidth(
       text,
@@ -30,20 +30,7 @@ const TotalBalancePie = () => {
     };">${text}</div>`;
   }
 
-  const data = [
-    {
-      type: "USDC",
-      value: 3200, // employee numbers
-    },
-    {
-      type: "ETH",
-      value: 2000,
-    },
-    {
-      type: "MATIC",
-      value: 1500,
-    },
-  ];
+  
   const config = {
     appendPadding: 10,
     data,

@@ -4,11 +4,15 @@ import { Card } from "antd";
 import PieCard from "./pieCard.jsx";
 import TotalBalancePie from "./totalBalancePie";
 import styles from "../styles/dashboard.module.css";
+import _ from "lodash";
+import { asDataPairs } from "./calculate";
 
-const TotalBalance = () => (
-  <div className={styles.cardbox}>
-    <PieCard pie={<TotalBalancePie />} title="TOTAL" statistics={234} />
-  </div>
+const TotalBalance = ({ statistics, byToken }) => (
+  <PieCard
+    pie={<TotalBalancePie data={asDataPairs(byToken)} />}
+    title="total"
+    statistics={statistics}
+  />
 );
 
 export default TotalBalance;
