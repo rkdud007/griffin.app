@@ -41,11 +41,13 @@
 
 ## Problem we solve
 
-Many people in the Web3 scene are already being paid with crypto, and the statistics show that the amount of crypto being paid as wages is expected to increase. In this context, more and more solutions that make crypto payroll easier are also emerging.
+Many people in the Web3 scene are already paid with crypto, and statistics show that the amount of crypto paid as wages is expected to increase. In this context, solutions that make crypto payroll easier are also emerging recently.
 
-However, the biggest problem with these services is that all transactions are inevitably transparent due to the characteristics of the existing blockchains; disclosing all the salary amount, timing, and recipient's wallet address.
+However, the biggest problem with all of these services is that all transactions are inevitably transparent due to the characteristics of the existing blockchains, and all the salary amount, timing, and recipient's wallet address are disclosed.
 
-Most companies are reluctant to disclose the amount of wages employees receive, because they lose their vantage point when negotiating salary with employees. Since existing crypto payroll services do not meet the privacy standards, crypto wages are becoming less and less popular among companies. Griffin solves
+In fact, most companies are reluctant to disclose the amount of wages employees receive due to their advantage in salary negotiations and relationship issues between employees.
+
+So existing crypto payroll services do not meet the company's needs regarding this privacy issue, and this is one of the biggest reasons why crypto wage payments are not becoming popular.
 
 <br>
 
